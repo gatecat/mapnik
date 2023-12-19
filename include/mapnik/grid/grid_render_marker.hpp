@@ -48,7 +48,7 @@ void render_raster_marker(RendererType ren,
                           double opacity)
 {
     using color_type = typename RendererType::color_type;
-    agg::scanline_bin sl;
+    agg::scanline32_bin sl;
     double width  = src.width();
     double height = src.height();
     double p[8];

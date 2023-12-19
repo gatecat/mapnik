@@ -59,7 +59,7 @@ void grid_renderer<T>::process(building_symbolizer const& sym,
     using color_type = typename grid_renderer_base_type::pixfmt_type::color_type;
     using renderer_type = agg::renderer_scanline_bin_solid<grid_renderer_base_type>;
     using transform_path_type = transform_path_adapter<view_transform, vertex_adapter>;
-    agg::scanline_bin sl;
+    agg::scanline32_bin sl;
 
     grid_rendering_buffer buf(pixmap_.raw_data(), common_.width_, common_.height_, common_.width_);
     pixfmt_type pixf(buf);

@@ -72,7 +72,7 @@ void agg_renderer<T0,T1>::process(building_symbolizer const& sym,
     unsigned b=fill.blue();
     unsigned a=fill.alpha();
     renderer ren(renb);
-    agg::scanline_u8 sl;
+    agg::scanline32_u8 sl;
 
     ras_ptr->reset();
     double gamma = get<value_double, keys::gamma>(sym, feature, common_.vars_);

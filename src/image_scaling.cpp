@@ -116,7 +116,7 @@ void scale_image_agg(T & target, T const& source, scaling_method_e scaling_metho
 
     // define some stuff we'll use soon
     agg::rasterizer_scanline_aa<> ras;
-    agg::scanline_u8 sl;
+    agg::scanline32_u8 sl;
     agg::span_allocator<color_type> sa;
 
     // initialize source AGG buffer

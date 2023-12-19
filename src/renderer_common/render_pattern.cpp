@@ -49,7 +49,7 @@ void render_pattern<image_rgba8>(marker_svg const& marker,
     using pixfmt = agg::pixfmt_rgba32_pre;
     using renderer_base = agg::renderer_base<pixfmt>;
     using renderer_solid = agg::renderer_scanline_aa_solid<renderer_base>;
-    agg::scanline_u8 sl;
+    agg::scanline32_u8 sl;
 
     mapnik::box2d<double> const& bbox = marker.bounding_box() * tr;
     mapnik::coord<double,2> c = bbox.center();

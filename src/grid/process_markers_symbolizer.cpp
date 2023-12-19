@@ -30,7 +30,7 @@ porting notes -->
  - current_buffer_ -> pixmap_
  - agg::rendering_buffer -> grid_renderering_buffer
  - no gamma
- - agg::scanline_bin sl
+ - agg::scanline32_bin sl
  - grid_rendering_buffer
  - agg::renderer_scanline_bin_solid
  - TODO - clamp sizes to > 4 pixels of interactivity
@@ -95,7 +95,7 @@ struct grid_markers_renderer_context : markers_renderer_context
                                agg::trans_affine const& marker_tr)
     {
         SvgRenderer svg_renderer_(path, attrs);
-        agg::scanline_bin sl_;
+        agg::scanline32_bin sl_;
         svg_renderer_.render_id(ras_, sl_, renb_, feature_.id(), marker_tr,
                                 params.opacity, src->bounding_box());
         place_feature();

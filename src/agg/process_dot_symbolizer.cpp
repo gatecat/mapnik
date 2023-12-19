@@ -81,7 +81,7 @@ struct render_dot_symbolizer : util::noncopyable
     double rx_;
     double ry_;
     agg::ellipse el_;
-    agg::scanline_u8 sl_;
+    agg::scanline32_u8 sl_;
 };
 
 } // ns detail

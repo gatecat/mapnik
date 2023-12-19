@@ -89,7 +89,7 @@ MAPNIK_DECL void warp_image (T & target, T const& source, proj_transform const& 
     prj_trans.backward(xs.data(), ys.data(), nullptr, mesh_nx*mesh_ny);
 
     agg::rasterizer_scanline_aa<> rasterizer;
-    agg::scanline_bin scanline;
+    agg::scanline32_bin scanline;
     agg::rendering_buffer buf(target.bytes(),
                               target.width(),
                               target.height(),

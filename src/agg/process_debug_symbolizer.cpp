@@ -163,7 +163,7 @@ struct RingRenderer {
     BufferType & im_;
     view_transform const& tr_;
     proj_transform const& prj_trans_;
-    agg::scanline_u8 sl_;
+    agg::scanline32_u8 sl_;
 };
 
 template <typename BufferType>

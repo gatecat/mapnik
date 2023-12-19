@@ -204,7 +204,7 @@ private:
         renderer_base rb(pixfmt);
         renderer_bin ren_bin(rb);
         ren_bin.color(agg::gray8(1));
-        agg::scanline_bin sl_bin;
+        agg::scanline32_bin sl_bin;
         agg::render_scanlines(ras, sl_bin, ren_bin);
 
         return hit_bitmap;

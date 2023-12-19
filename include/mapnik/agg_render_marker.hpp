@@ -53,7 +53,7 @@ void render_vector_marker(SvgRenderer & svg_renderer, RasterizerType & ras, Rend
                           box2d<double> const& bbox, agg::trans_affine const& tr,
                           double opacity, bool snap_to_pixels)
 {
-    agg::scanline_u8 sl;
+    agg::scanline32_u8 sl;
     if (snap_to_pixels)
     {
         // https://github.com/mapnik/mapnik/issues/1316
@@ -77,7 +77,7 @@ void render_raster_marker(RendererType renb, RasterizerType & ras, image_rgba8 c
     using const_rendering_buffer = util::rendering_buffer<image_rgba8>;
     using pixfmt_pre = agg::pixfmt_alpha_blend_rgba<agg::blender_rgba32_pre, const_rendering_buffer, agg::pixel32_type>;
 
-    agg::scanline_u8 sl;
+    agg::scanline32_u8 sl;
     double width  = src.width();
     double height = src.height();
     if (std::fabs(1.0 - scale_factor) < 0.001

@@ -109,7 +109,7 @@ void grid_renderer<T>::process(polygon_pattern_symbolizer const& sym,
 
     // render id
     ren.color(color_type(feature.id()));
-    agg::scanline_bin sl;
+    agg::scanline32_bin sl;
     ras_ptr->filling_rule(agg::fill_even_odd);
     agg::render_scanlines(*ras_ptr, sl, ren);
 

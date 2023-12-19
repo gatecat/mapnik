@@ -90,7 +90,7 @@ struct thunk_renderer : render_thunk_list_dispatch
         agg::trans_affine offset_tr = thunk.tr_;
         offset_tr.translate(offset_.x, offset_.y);
         //render_vector_marker(svg_renderer, *ras_ptr_, renb, thunk.src_->bounding_box(), offset_tr, thunk.opacity_, thunk.snap_to_pixels_);
-        agg::scanline_bin sl;
+        agg::scanline32_bin sl;
         svg_renderer.render_id(ras_, sl, renb, feature_.id(), offset_tr, thunk.opacity_, thunk.src_->bounding_box());
         pixmap_.add_feature(feature_);
     }

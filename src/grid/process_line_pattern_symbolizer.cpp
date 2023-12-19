@@ -75,7 +75,7 @@ void grid_renderer<T>::process(line_pattern_symbolizer const& sym,
     using color_type = typename grid_renderer_base_type::pixfmt_type::color_type;
     using renderer_type = agg::renderer_scanline_bin_solid<grid_renderer_base_type>;
 
-    agg::scanline_bin sl;
+    agg::scanline32_bin sl;
 
     grid_rendering_buffer buf(pixmap_.raw_data(), common_.width_, common_.height_, common_.width_);
     pixfmt_type pixf(buf);
