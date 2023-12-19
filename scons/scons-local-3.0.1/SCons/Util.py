@@ -46,7 +46,7 @@ try:
 except ImportError as e:
     from collections import UserList
 
-from collections import Iterable
+from collections.abc import Iterable
 
 try:
     from UserString import UserString

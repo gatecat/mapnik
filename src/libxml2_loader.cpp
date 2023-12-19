@@ -79,7 +79,7 @@ public:
 
         if (!doc)
         {
-            xmlError * error = xmlCtxtGetLastError(ctx_);
+            const xmlError * error = xmlCtxtGetLastError(ctx_);
             if (error)
             {
                 std::string msg("XML document not well formed:\n");
@@ -118,7 +118,7 @@ public:
         if (!doc)
         {
             std::string msg("XML document not well formed");
-            xmlError * error = xmlCtxtGetLastError( ctx_ );
+            const xmlError * error = xmlCtxtGetLastError( ctx_ );
             if (error)
             {
                 msg += ":\n";
