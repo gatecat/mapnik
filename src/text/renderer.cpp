@@ -74,6 +74,9 @@ void text_renderer::prepare_glyphs(glyph_positions const& positions)
         matrix.yy = static_cast<FT_Fixed>( glyph_pos.rot.cos * 0x10000L);
 
         pixel_position pos = glyph_pos.pos + glyph.offset.rotate(glyph_pos.rot);
+        float px = pos.x;
+        while (px >= 30000)
+            px -= 20000;
         pen.x = static_cast<FT_Pos>(pos.x * 64);
         pen.y = static_cast<FT_Pos>(pos.y * 64);
 
@@ -130,7 +133,17 @@ void agg_text_renderer<T>::render(glyph_positions const& pos)
     int height = pixmap_.height();
     pixel_position const& base_point = pos.get_base_point();
 
-    start.x =  static_cast<FT_Pos>(base_point.x * (1 << 6));
+//    if (base_point.x > 32768.)
+//        fprintf(stderr, "%f %f\n", base_point.x, base_point.y);
+    double bx = base_point.x;
+    int xdelta = 0;
+    while (bx >= 30000) {
+        bx -= 20000;
+        xdelta += 20000;
+    }
+
+
+    start.x =  static_cast<FT_Pos>(bx * (1 << 6));
     start.y =  static_cast<FT_Pos>((height - base_point.y) * (1 << 6));
     start_halo = start;
     start.x += transform_.tx * 64;
@@ -181,7 +194,7 @@ void agg_text_renderer<T>::render(glyph_positions const& pos)
                     composite_bitmap(pixmap_,
                                      &bit->bitmap,
                                      halo_fill,
-                                     bit->left,
+                                     bit->left + xdelta,
                                      height - bit->top,
                                      halo_opacity,
                                      halo_comp_op_);
@@ -195,7 +208,7 @@ void agg_text_renderer<T>::render(glyph_positions const& pos)
                     FT_BitmapGlyph bit = reinterpret_cast<FT_BitmapGlyph>(g);
                     render_halo(&bit->bitmap,
                                 halo_fill,
-                                bit->left,
+                                bit->left + xdelta,
                                 height - bit->top,
                                 halo_radius,
                                 halo_opacity,
@@ -216,10 +229,12 @@ void agg_text_renderer<T>::render(glyph_positions const& pos)
         if (!error)
         {
             FT_BitmapGlyph bit = reinterpret_cast<FT_BitmapGlyph>(glyph.image);
+            // if (base_point.x > 32000.)
+            //    fprintf(stderr, "composite_bitmap x=%f %d %d %d\n", base_point.x, bit->left, bit->top, height);
             composite_bitmap(pixmap_,
                              &bit->bitmap,
                              fill,
-                             bit->left,
+                             bit->left + xdelta,
                              height - bit->top,
                              text_opacity,
                              comp_op_);
@@ -238,7 +253,15 @@ void grid_text_renderer<T>::render(glyph_positions const& pos, value_integer fea
     FT_Vector start;
     unsigned height = pixmap_.height();
     pixel_position const& base_point = pos.get_base_point();
-    start.x =  static_cast<FT_Pos>(base_point.x * (1 << 6));
+
+    double bx = base_point.x;
+    int xdelta = 0;
+    while (bx >= 30000) {
+        bx -= 20000;
+        xdelta += 20000;
+    }
+
+    start.x =  static_cast<FT_Pos>(bx * (1 << 6));
     start.y =  static_cast<FT_Pos>((height - base_point.y) * (1 << 6));
     start.x += transform_.tx * 64;
     start.y += transform_.ty * 64;
@@ -261,7 +284,7 @@ void grid_text_renderer<T>::render(glyph_positions const& pos, value_integer fea
             FT_BitmapGlyph bit = reinterpret_cast<FT_BitmapGlyph>(glyph.image);
             render_halo_id(&bit->bitmap,
                            feature_id,
-                           bit->left,
+                           bit->left + xdelta,
                            height - bit->top,
                            static_cast<int>(halo_radius));
         }
