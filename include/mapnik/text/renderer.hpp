@@ -51,8 +51,9 @@ struct glyph_t
 {
     FT_Glyph image;
     detail::evaluated_format_properties const& properties;
-    glyph_t(FT_Glyph image_, detail::evaluated_format_properties const& properties_)
-        : image(image_), properties(properties_) {}
+    int xoffset;
+    glyph_t(FT_Glyph image_, detail::evaluated_format_properties const& properties_, int xoffset_ = 0)
+        : image(image_), properties(properties_), xoffset(xoffset_) {}
 };
 
 class text_renderer : private util::noncopyable
